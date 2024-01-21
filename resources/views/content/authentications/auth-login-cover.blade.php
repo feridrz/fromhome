@@ -5,7 +5,7 @@ $customizerHidden = 'customizer-hide';
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Login Basic - Pages')
+@section('title', 'Login Cover - Pages')
 
 @section('vendor-style')
 <!-- Vendor -->
@@ -25,23 +25,52 @@ $customizerHidden = 'customizer-hide';
 
 @section('page-script')
 <script src="{{asset('assets/js/pages-auth.js')}}"></script>
+
+<script>
+  $(document).ready(function() {
+    function checkWidth() {
+      var windowSize = $(window).width();
+      if (windowSize < 576) {
+        $('.card').removeClass('card');
+      } else {
+        $('.card-wrapper').addClass('card');
+      }
+    }
+
+    // Execute on load
+    checkWidth();
+    // Bind event listener
+    $(window).resize(checkWidth);
+  });
+</script>
+
 @endsection
 
 @section('content')
-<div class="position-relative">
-  <div class="authentication-wrapper authentication-basic container-p-y">
-    <div class="authentication-inner py-4">
+<div class="authentication-wrapper authentication-cover">
+  <!-- Logo -->
+  <a href="{{url('/')}}" class="auth-cover-brand d-flex align-items-center gap-2">
+    <span class="app-brand-logo demo"><img width="150px" src="{{ asset('assets/img/company/logo_az_wide.png') }}" alt="Website Logo"></span>
+{{--    <span class="app-brand-text demo text-heading fw-bold">{{config('variables.companyName')}}</span>--}}
+  </a>
+  <!-- /Logo -->
+  <div class="authentication-inner row m-0">
+    <!-- /Left Section -->
+    <div class="d-none d-lg-flex col-lg-7 col-xl-5 align-items-center justify-content-center p-5 pb-2">
+      <img style="object-fit: contain" src="{{asset('assets/img/illustrations/auth_cover1.jpg') }}" class="authentication-image" alt="mask" />
+    </div>
+    <!-- /Left Section -->
 
-      <!-- Login -->
-      <div class="card p-2">
+    <!-- Login -->
+    <div class="card-wrapper d-flex justify-content-center col-12 col-lg-5 col-xl-7 align-items-center authentication-bg position-relative py-sm-5 px-4 py-4">
+
+      <div class="card p-2 col-7">
 
         <!-- Logo -->
         <div class="app-brand justify-content-center mt-5">
           <a href="{{url('/')}}" class="app-brand-link gap-2">
             <span class="app-brand-logo demo"><img width="150px" src="{{ asset('assets/img/company/logo.png') }}" alt="Website Logo">
-</span>
-
-{{--            <span class="app-brand-text demo text-heading fw-bold">{{config('variables.companyAcronym')}}</span>--}}
+            </span>
           </a>
         </div>
         <!-- /Logo -->
@@ -94,9 +123,8 @@ $customizerHidden = 'customizer-hide';
 
         </div>
       </div>
-      <!-- /Login -->
-      <img alt="mask" src="{{asset('assets/img/illustrations/auth-basic-login-mask-'.$configData['style'].'.png') }}" class="authentication-image d-none d-lg-block" data-app-light-img="illustrations/auth-basic-login-mask-light.png" data-app-dark-img="illustrations/auth-basic-login-mask-dark.png" />
     </div>
+    <!-- /Login -->
   </div>
 </div>
 @endsection
